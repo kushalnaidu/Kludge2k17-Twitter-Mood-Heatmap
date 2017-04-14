@@ -2,8 +2,7 @@ import re
 from textblob import TextBlob
 from tweepy import OAuthHandler
 import tweepy
-
-
+from PIL import Image
 class TwitterClient(object):
     '''
     Generic Twitter Class for sentiment analysis.
@@ -13,10 +12,10 @@ class TwitterClient(object):
         Class constructor or initialization method.
         '''
         # keys and tokens from the Twitter Dev Console
-        consumer_key = 'ZHVw6g8pHNsKTgZw3Z2zmf8gD'
-        consumer_secret = 'kmTLUtrnRGrHItrbdqPS2zOv6Lnd1SlFY2RbHqUhLi53yPX9m0'
-        access_token = '3306838494-XqZSCK7IFlZMUB48hC1TJnwZHj57wDapky196Oo'
-        access_token_secret = '84MdMlsysDfVM6tTxiYGXfoK4es2u7E0CJgf5KLhHrTyV'
+        consumer_key = '-'
+        consumer_secret = '-'
+        access_token = '-'
+        access_token_secret = '-'
  
         # attempt authentication
         try:
@@ -196,6 +195,8 @@ def main():
                 p=patches.Circle((((latitudes[i]+2.5)*46.67),(longitudes[i]+2.5)*46.67), 2.5*140/3.0,alpha=negative[i]/100.0)
                 p.set_facecolor('r')  
             ax5.add_patch(p)
+    if(max(negative)==50):
+        SerialOut.output();
     #p=patches.Circle((0,0), 5*50/3,alpha=0.1)
     #ax5.add_patch(p)
     #fig5.savefig('circle5.png', dpi=90, bbox_inches='tight')
@@ -208,6 +209,8 @@ def main():
     img=imread("./pic.jpg")
     plt.imshow(img,extent=[0, 1400, 0, 1400])
     fig5.savefig('circle5.png', dpi=90, bbox_inches='tight')
+    img=Image.open('circle5.png')
+    img.show()
     #plt.show()
 if __name__ == "__main__":
     # calling main function
