@@ -87,7 +87,69 @@ class TwitterClient(object):
             # print error (if any)
             print("Error : " + str(e))
  
-
+def main():
+    # creating object of TwitterClient Class
+    negative=[]
+    latitudes=[]
+    longitudes=[]
+    positive=[]
+    api = TwitterClient()
+    lat_s=12.85
+    lat_n=13.16
+    long_e=77.76
+    long_w=77.45
+    
+    for i in [12.85,12.90,12.95,13,13.05,13.1,13.15]:
+        for j in [77.45,77.5,77.55,77.6,77.65,77.70,77.75]:
+            latitudes.append((i-12.85)*100)
+            longitudes.append((i-77.45)*100)
+            
+    # calling function to get tweets
+    #tweets = api.get_tweets(query = 'Kill OR Trump OR Protest OR Riot OR Fight OR War OR Bomb OR Mob OR Moab OR Condemn:( -#IPL')
+            tweets = api.get_tweets(query = 'at OR of OR jam OR Traffic OR Kill OR Trump OR Protest OR Riot OR Fight OR War OR Bomb OR Mob OR A OR a OR Moab OR Condemn OR The OR a OR world OR peace OR IPL OR #', gc=str(i)+","+str(j)+",5km")
+            if(len(tweets)!=0):
+                # picking positive tweets from tweets
+                ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
+                # percentage of positive tweets
+                
+                # picking negative tweets from tweets
+                
+                ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
+                # percentage of negative tweets
+                if(len(ntweets)!=0 and len(ptweets)!=0):
+                    print len(ntweets),len(ptweets)
+                    print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))    
+                    print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
+                    # percentage of neutral tweets
+                    negative.append(100*len(ntweets)/len(tweets))
+                    
+                    print("Neutral tweets percentage: {} % \
+                        ".format((100*len(tweets) - len(ntweets) - len(ptweets))/len(tweets)))
+                    positive.append(100*len(ptweets)/len(tweets))
+                    
+                    print("\n\nPositive tweets:")
+                    for tweet in ptweets[:2]:
+                    # printing first 5 positive tweets
+                        print(tweet['text'])
+                 
+                    # printing first 5 negative tweets
+                    print("\n\nNegative tweets:")
+                    for tweet in ntweets[:2]:
+                        print(tweet['text'])
+                    
+                    print
+                    print
+                    print
+                else:
+                    negative.append(-1)
+                    positive.append(-1)
+            else:
+                positive.append(-1)
+                negative.append(-1)
+    print negative
+    print len(negative)
+ 
+    
 if __name__ == "__main__":
     # calling main function
     main()
