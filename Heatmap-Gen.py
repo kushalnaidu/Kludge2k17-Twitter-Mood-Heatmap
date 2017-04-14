@@ -98,10 +98,11 @@ def main():
     lat_n=13.16
     long_e=77.76
     long_w=77.45
+    '''
     for i in [12.85,12.90,12.95,13,13.05,13.1,13.15]:
         for j in [77.45,77.5,77.55,77.6,77.65,77.70,77.75]:
             latitudes.append((i-12.85)*100)
-            longitudes.append((i-77.45)*100)
+            longitudes.append((j-77.45)*100)
             
     # calling function to get tweets
     #tweets = api.get_tweets(query = 'Kill OR Trump OR Protest OR Riot OR Fight OR War OR Bomb OR Mob OR Moab OR Condemn:( -#IPL')
@@ -158,8 +159,39 @@ def main():
     df['Neg']=negative
         
     df.to_csv("data.csv");
+    '''
+    import pandas as pd
+    df=pd.read_csv("data.csv");
+    latitudes=df['Lat']
+    longitudes=df['Longi']
+    negative=df["Neg"]
+    import matplotlib.pyplot as plt
+    import matplotlib.patches as patches
     
+    from scipy.misc import imread
+    fig5 = plt.figure()
+    ax5 = fig5.add_subplot(111, aspect='equal')
+    count=0
     
+    nneg=[]
+    for i in range(len(negative)):
+        nneg.append((negative[i]-min(negative))/((max(negative)-min(negative))*1.0))
+    #print nneg
+    
+    #print len(nneg)
+    #print len(latitudes)
+    for i in range(49):
+            
+            #print i+5,j+6465
+            p=patches.Circle((((latitudes[i]+2.5)*16.67),(longitudes[i]+2.5)*16.67), 2.5*50/3.0,alpha=nneg[i])
+
+            ax5.add_patch(p)
+    #p=patches.Circle((0,0), 5*50/3,alpha=0.1)
+    #ax5.add_patch(p)
+    #fig5.savefig('circle5.png', dpi=90, bbox_inches='tight')
+    img=imread("./pic.jpg")
+    plt.imshow(img,extent=[0, 500, 0, 500])
+    plt.show()
 if __name__ == "__main__":
     # calling main function
     main()
