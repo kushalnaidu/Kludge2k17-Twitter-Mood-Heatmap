@@ -1,9 +1,9 @@
 import re
 from textblob import TextBlob
 from tweepy import OAuthHandler
-from textblob import TextBlob
 import tweepy
-import matplotlib
+
+
 class TwitterClient(object):
     '''
     Generic Twitter Class for sentiment analysis.
@@ -186,7 +186,7 @@ def main():
     for i in range(49):
             
             #print i+5,j+6465
-            p=patches.Circle((((latitudes[i]+2.5)*46.67),(longitudes[i]+2.5)*46.67), 2.5*140/3.0,alpha=negative[i]/100.0)
+            
             if(negative[i]<20):
                 
                 p=patches.Circle((((latitudes[i]+2.5)*46.67),(longitudes[i]+2.5)*46.67), 2.5*140/3.0,alpha=(20-negative[i])/25.0)
@@ -199,10 +199,16 @@ def main():
     #p=patches.Circle((0,0), 5*50/3,alpha=0.1)
     #ax5.add_patch(p)
     #fig5.savefig('circle5.png', dpi=90, bbox_inches='tight')
+    ax5.set_ylabel('Longitude')
+    ax5.set_xlabel('Latitude')
+    
+    import numpy as np
+    ax5.set_yticks(np.arange(7),[12.85,12.90,12.95,13,13.05,13.1,13.15])
+    ax5.set_xticks(np.arange(7),[77.45,77.5,77.55,77.6,77.65,77.70,77.75])
     img=imread("./pic.jpg")
     plt.imshow(img,extent=[0, 1400, 0, 1400])
-    
-    plt.show()
+    fig5.savefig('circle5.png', dpi=90, bbox_inches='tight')
+    #plt.show()
 if __name__ == "__main__":
     # calling main function
     main()
