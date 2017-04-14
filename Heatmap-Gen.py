@@ -165,6 +165,16 @@ def main():
     latitudes=df['Lat']
     longitudes=df['Longi']
     negative=df["Neg"]
+    neg=[]
+    for i in negative:
+        if(i<0):
+            neg.append(0);
+        else:
+            neg.append(i);
+    print neg
+    df['Neg']=neg
+    df.to_csv("data.csv")
+    '''
     import matplotlib.pyplot as plt
     import matplotlib.patches as patches
     from pylab import rcParams
@@ -194,6 +204,7 @@ def main():
     plt.imshow(img,extent=[0, 1400, 0, 1400])
     
     plt.show()
+    '''
 if __name__ == "__main__":
     # calling main function
     main()
