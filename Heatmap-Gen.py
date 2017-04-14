@@ -162,17 +162,26 @@ def main():
     '''
     import pandas as pd
     df=pd.read_csv("data.csv");
+    pp=df['Pos']
     latitudes=df['Lat']
     longitudes=df['Longi']
     negative=df["Neg"]
     neg=[]
+    pos=[]
     for i in negative:
         if(i<0):
             neg.append(0);
         else:
             neg.append(i);
     print neg
-    df['Neg']=neg
+
+    for i in pp:
+        if(i<0):
+            pos.append(0);
+        else:
+            pos.append(i);
+    print pos
+    df['Pos']=pos
     df.to_csv("data.csv")
     '''
     import matplotlib.pyplot as plt
