@@ -167,7 +167,8 @@ def main():
     negative=df["Neg"]
     import matplotlib.pyplot as plt
     import matplotlib.patches as patches
-    
+    from pylab import rcParams
+    rcParams['figure.figsize'] = 15,10
     from scipy.misc import imread
     fig5 = plt.figure()
     ax5 = fig5.add_subplot(111, aspect='equal')
@@ -183,14 +184,15 @@ def main():
     for i in range(49):
             
             #print i+5,j+6465
-            p=patches.Circle((((latitudes[i]+2.5)*16.67),(longitudes[i]+2.5)*16.67), 2.5*50/3.0,alpha=nneg[i])
-
+            p=patches.Circle((((latitudes[i]+2.5)*46.67),(longitudes[i]+2.5)*46.67), 2.5*140/3.0,alpha=negative[i]/100.0)
+            p.set_facecolor('r')
             ax5.add_patch(p)
     #p=patches.Circle((0,0), 5*50/3,alpha=0.1)
     #ax5.add_patch(p)
     #fig5.savefig('circle5.png', dpi=90, bbox_inches='tight')
     img=imread("./pic.jpg")
-    plt.imshow(img,extent=[0, 500, 0, 500])
+    plt.imshow(img,extent=[0, 1400, 0, 1400])
+    
     plt.show()
 if __name__ == "__main__":
     # calling main function
