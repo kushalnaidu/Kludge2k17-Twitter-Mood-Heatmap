@@ -166,24 +166,7 @@ def main():
     latitudes=df['Lat']
     longitudes=df['Longi']
     negative=df["Neg"]
-    neg=[]
-    pos=[]
-    for i in negative:
-        if(i<0):
-            neg.append(0);
-        else:
-            neg.append(i);
-    print neg
-
-    for i in pp:
-        if(i<0):
-            pos.append(0);
-        else:
-            pos.append(i);
-    print pos
-    df['Pos']=pos
-    df.to_csv("data.csv")
-    '''
+    
     import matplotlib.pyplot as plt
     import matplotlib.patches as patches
     from pylab import rcParams
@@ -204,7 +187,14 @@ def main():
             
             #print i+5,j+6465
             p=patches.Circle((((latitudes[i]+2.5)*46.67),(longitudes[i]+2.5)*46.67), 2.5*140/3.0,alpha=negative[i]/100.0)
-            p.set_facecolor('r')
+            if(negative[i]<20):
+                
+                p=patches.Circle((((latitudes[i]+2.5)*46.67),(longitudes[i]+2.5)*46.67), 2.5*140/3.0,alpha=(20-negative[i])/25.0)
+                p.set_facecolor('g')
+            else:
+              
+                p=patches.Circle((((latitudes[i]+2.5)*46.67),(longitudes[i]+2.5)*46.67), 2.5*140/3.0,alpha=negative[i]/100.0)
+                p.set_facecolor('r')  
             ax5.add_patch(p)
     #p=patches.Circle((0,0), 5*50/3,alpha=0.1)
     #ax5.add_patch(p)
@@ -213,7 +203,6 @@ def main():
     plt.imshow(img,extent=[0, 1400, 0, 1400])
     
     plt.show()
-    '''
 if __name__ == "__main__":
     # calling main function
     main()
