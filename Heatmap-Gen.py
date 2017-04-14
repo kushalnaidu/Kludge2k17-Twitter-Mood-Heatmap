@@ -98,7 +98,6 @@ def main():
     lat_n=13.16
     long_e=77.76
     long_w=77.45
-    
     for i in [12.85,12.90,12.95,13,13.05,13.1,13.15]:
         for j in [77.45,77.5,77.55,77.6,77.65,77.70,77.75]:
             latitudes.append((i-12.85)*100)
@@ -149,6 +148,17 @@ def main():
     print negative
     print len(negative)
  
+    
+    
+    import pandas as pd
+    df=pd.DataFrame()
+    df['Lat']=latitudes
+    df['Longi']=longitudes
+    df['Pos']=positive    
+    df['Neg']=negative
+        
+    df.to_csv("data.csv");
+    
     
 if __name__ == "__main__":
     # calling main function
