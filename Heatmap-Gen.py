@@ -2,6 +2,8 @@ import re
 from textblob import TextBlob
 from tweepy import OAuthHandler
 import tweepy
+import serial 
+import SerialOut
 from PIL import Image
 class TwitterClient(object):
     '''
@@ -195,8 +197,8 @@ def main():
                 p=patches.Circle((((latitudes[i]+2.5)*46.67),(longitudes[i]+2.5)*46.67), 2.5*140/3.0,alpha=negative[i]/100.0)
                 p.set_facecolor('r')  
             ax5.add_patch(p)
-    if(max(negative)==50):
-        SerialOut.output();
+    if(max(negative)>=10):
+        SerialOut.output()
     #p=patches.Circle((0,0), 5*50/3,alpha=0.1)
     #ax5.add_patch(p)
     #fig5.savefig('circle5.png', dpi=90, bbox_inches='tight')
@@ -209,8 +211,8 @@ def main():
     img=imread("./pic.jpg")
     plt.imshow(img,extent=[0, 1400, 0, 1400])
     fig5.savefig('circle5.png', dpi=90, bbox_inches='tight')
-    img=Image.open('circle5.png')
-    img.show()
+    #img=Image.open('circle5.png')
+    #img.show()
     #plt.show()
 if __name__ == "__main__":
     # calling main function
