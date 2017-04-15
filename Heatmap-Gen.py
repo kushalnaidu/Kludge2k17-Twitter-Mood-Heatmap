@@ -14,10 +14,10 @@ class TwitterClient(object):
         Class constructor or initialization method.
         '''
         # keys and tokens from the Twitter Dev Console
-        consumer_key = '-'
-        consumer_secret = '-'
-        access_token = '-'
-        access_token_secret = '-'
+        consumer_key = 'gZ75UyRoxw8RVIWLZTzCmeGCS'
+        consumer_secret = 'l9BmjyejQKqkatrCqk5eStzJVjz7PjBPGmf22JiXr2OjVSTfqf'
+        access_token = '3306838494-XqZSCK7IFlZMUB48hC1TJnwZHj57wDapky196Oo'
+        access_token_secret = '84MdMlsysDfVM6tTxiYGXfoK4es2u7E0CJgf5KLhHrTyV'
  
         # attempt authentication
         try:
@@ -99,7 +99,7 @@ def main():
     lat_n=13.16
     long_e=77.76
     long_w=77.45
-    '''
+    
     for i in [12.85,12.90,12.95,13,13.05,13.1,13.15]:
         for j in [77.45,77.5,77.55,77.6,77.65,77.70,77.75]:
             latitudes.append((i-12.85)*100)
@@ -159,7 +159,7 @@ def main():
     df['Pos']=positive    
     df['Neg']=negative
         
-    df.to_csv("data.csv");
+    df.to_csv("data2.csv");
     '''
     import pandas as pd
     df=pd.read_csv("data.csv");
@@ -167,7 +167,7 @@ def main():
     latitudes=df['Lat']
     longitudes=df['Longi']
     negative=df["Neg"]
-    
+    '''
     import matplotlib.pyplot as plt
     import matplotlib.patches as patches
     from pylab import rcParams
@@ -197,7 +197,7 @@ def main():
                 p=patches.Circle((((latitudes[i]+2.5)*46.67),(longitudes[i]+2.5)*46.67), 2.5*140/3.0,alpha=negative[i]/100.0)
                 p.set_facecolor('r')  
             ax5.add_patch(p)
-    if(max(negative)>=10):
+    if(max(negative)>=80):
         SerialOut.output()
     #p=patches.Circle((0,0), 5*50/3,alpha=0.1)
     #ax5.add_patch(p)
@@ -210,7 +210,7 @@ def main():
     ax5.set_xticks(np.arange(7),[77.45,77.5,77.55,77.6,77.65,77.70,77.75])
     img=imread("./pic.jpg")
     plt.imshow(img,extent=[0, 1400, 0, 1400])
-    fig5.savefig('circle5.png', dpi=90, bbox_inches='tight')
+    fig5.savefig('circles.png', dpi=90, bbox_inches='tight')
     #img=Image.open('circle5.png')
     #img.show()
     #plt.show()

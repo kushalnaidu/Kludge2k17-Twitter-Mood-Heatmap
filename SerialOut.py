@@ -22,7 +22,7 @@ def output():
     while(time.time()-ticks<=4):
         None;
     ser.write('0')    
- 
+    ser.setDTR(level=0)
     ser.close()
     
 if __name__ == "__main__":
